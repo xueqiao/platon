@@ -51,11 +51,13 @@ class RetrievalResult:
         plt.clf()
         if self.retrieval_type == "dynesty":
             fig = corner.corner(self.samples, weights=self.weights,
+                                quantiles=[0.16, 0.5, 0.84],show_titles=True,
                           range=[0.99] * self.samples.shape[1],
                           labels=self.fit_info.fit_param_names)
             fig.savefig(filename)
         elif self.retrieval_type == "emcee":
             fig = corner.corner(self.flatchain,
+                                quantiles=[0.16, 0.5, 0.84],show_titles=True,
                                 range=[0.99] * self.flatchain.shape[1],
                                 labels=self.fit_info.fit_param_names)
             fig.savefig(filename)
